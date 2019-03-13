@@ -8,9 +8,9 @@ export default class Display extends Component {
 
   render() {
     return (
-      <div>
+      <th>
         <h2>{this.props.content}</h2>
-      </div>
+      </th>
     )
   }
 }
