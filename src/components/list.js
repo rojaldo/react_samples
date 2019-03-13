@@ -5,9 +5,11 @@ export default class List extends Component {
     props = {heroes:[]}
     render() {
         const listHeroes = this.props.heroes.map(
-            (hero, i) => <ListGroup.Item key={i}>
+            (hero, index) => <ListGroup.Item key={index}>
             <h3>{hero.name}</h3>
-            <p>{hero.description}</p></ListGroup.Item>)
+            <p>{hero.description}</p>
+            <button type="button" class="btn btn-danger" onClick={()=>this.props.onRemove(index)}>Remove</button>
+            </ListGroup.Item>)
         return (
             <div>
                 <ListGroup>
