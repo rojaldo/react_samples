@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import YouTube from 'react-youtube';
 
 export default class Apod extends Component {
     state = { data: {}, startDate: new Date() };
@@ -25,8 +26,16 @@ export default class Apod extends Component {
         fetch(url)
         .then(response => response.json())
         .then(data => this.processResult(data))
+        this.setState({startDate: event});
     }
     render() {
+        let content = <p></p>;
+        if (this.state.data.media_type === 'image') {
+            content = <img src={this.state.data.url} className="img-fluid" alt="" />;
+        } else if (this.state.data.media_type === 'video') {
+            content = <YouTube videoId="-3hO58HFa1M"></YouTube>
+            }
+           
         return (
             <div>
 
@@ -40,7 +49,7 @@ export default class Apod extends Component {
                 <div className="jumbotron">
                     <div className="container">
                         <h1>{this.state.data.title}</h1>
-                        <img src={this.state.data.url} className="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="" />
+                        {content}
                         <p>{this.state.data.explanation}</p>
                         <p>
                             <a class="btn btn-primary btn-lg" href={this.state.data.hdurl}>Download</a>
