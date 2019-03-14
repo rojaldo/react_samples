@@ -7,25 +7,38 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Heroes from './components/heroes';
 import Apod from './components/apod';
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Trivial from './components/trivial';
 
 class App extends Component {
   name = 'clase';
   render() {
     return (
-      <div>
-        <Tabs defaultActiveKey="apod" id="uncontrolled-tab-example">
-          <Tab eventKey="calculator" title="Calculator">
-          <Calculator></Calculator>
-          </Tab>
-        <Tab eventKey="heroes" title="Heroes">
-          <Heroes></Heroes>
-        </Tab>
-        <Tab eventKey="apod" title="Apod">
-          <Apod></Apod>
-        </Tab>
-      </Tabs>
-      </div>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/calculator">Calculator</Link>
+              </li>
+              <li>
+                <Link to="/heroes/">Heroes</Link>
+              </li>
+              <li>
+                <Link to="/apod/">Apod</Link>
+              </li>
+              <li>
+                <Link to="/trivial/">Trivial</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Route path="/calculator" exact component={Calculator} />
+          <Route path="/heroes/" component={Heroes} />
+          <Route path="/apod/" component={Apod} />
+          <Route path="/trivial/" component={Trivial} />
+        </div>
+      </Router>
     );
   }
 }
